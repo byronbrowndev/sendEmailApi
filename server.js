@@ -58,6 +58,44 @@ app.post("/email", function(req, res) {
     res.json(true);
   });
   
+app.post("/confirmation", function(req, res) {
+  
+  // expected body
+  // expected = {
+  //   name: 'test guest',
+  //   extras: 3 // number
+  // }
+
+  const name = req.body.name;
+  const extras = req.body.extras;
+
+  var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: keys.gmail.id,
+        pass: keys.gmail.secret
+      }
+    });
+    
+    var mailOptions = {
+      from: 'angeldavisdevelopment@gmail.com', // this is the low security email we set up
+      to: 'royals1stBirthday@gmail.com', // this is the email we want to send to
+      subject: 'party confirmation from: ' + name,
+      text: `${name} is coming with ${extras} people`
+    };
+    
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+        res.json(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+
+  res.json(true);
+});
+  
   // Starts the server to begin listening
   // =============================================================
   app.listen(PORT, function() {
