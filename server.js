@@ -90,10 +90,10 @@ app.post("/confirmation", function(req, res) {
         res.json(error);
       } else {
         console.log('Email sent: ' + info.response);
+        res.json('email Sent');
       }
     });
 
-  res.json(true);
 });
   
   // Starts the server to begin listening
