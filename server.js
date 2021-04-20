@@ -27,7 +27,7 @@ app.post("/email", function(req, res) {
     // This works because of our body parsing middleware
     console.log(req.body);
     const name = req.body.name;
-    const contact = `${req.body.email ? req.body.email : 'no number'}\n${req.body.phone ? req.body.phone : 'no number'}`;
+    const contact = `${req.body.email ? req.body.email : 'no email'}\n${req.body.phone ? req.body.phone : 'no number'}`;
     const message = `${req.body.message}\nContact Info\n${name}\n${contact}`;
     console.log(name, message);
 
@@ -58,7 +58,7 @@ app.post("/email", function(req, res) {
     res.json(true);
   });
   
-app.post("/confirmation", function(req, res) {
+app.post("/her", function(req, res) {
   
   // expected body
   // expected = {
