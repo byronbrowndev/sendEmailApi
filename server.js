@@ -23,9 +23,10 @@ app.get("/", function(req, res) {
   });
 
 app.post("/email", function(req, res) {
+    console.log('in the email endpoint')
     // req.body hosts is equal to the JSON post sent from the user
     // This works because of our body parsing middleware
-    console.log(req.body);
+    // console.log(req.body);
     const name = req.body.name;
     const contact = `${req.body.email ? req.body.email : 'no email'}\n${req.body.phone ? req.body.phone : 'no number'}`;
     const message = `${req.body.message}\nContact Info\n${name}\n${contact}`;
@@ -52,13 +53,14 @@ app.post("/email", function(req, res) {
           res.json(error);
         } else {
           console.log('Email sent: ' + info.response);
+          res.json('success: email sent');
         }
       });
   
-    res.json(true);
   });
   
-app.post("/her", function(req, res) {
+app.post("/rsvp", function(req, res) {
+  console.log('in the rsvp endpoint')
   
   // expected body
   // expected = {
