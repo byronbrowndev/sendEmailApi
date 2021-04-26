@@ -64,12 +64,11 @@ app.post("/rsvp", function(req, res) {
   
   // expected body
   // expected = {
-  //   name: 'test guest',
-  //   extras: 3 // number
+  //   info: 'test guest',
   // }
 
-  const name = req.body.name;
-  const extras = req.body.extras;
+  // const name = req.body.name;
+  const info = req.body.info;
 
   var transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -82,8 +81,8 @@ app.post("/rsvp", function(req, res) {
     var mailOptions = {
       from: 'angeldavisdevelopment@gmail.com', // this is the low security email we set up
       to: 'royals1stBirthday@gmail.com', // this is the email we want to send to
-      subject: 'party confirmation from: ' + name,
-      text: `${name} is coming with ${extras} people`
+      subject: 'party confirmation',
+      text: info
     };
     
     transporter.sendMail(mailOptions, function(error, info){
