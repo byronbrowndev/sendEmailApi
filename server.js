@@ -1,12 +1,15 @@
-require("dotenv").config();
+require('dotenv').config();
 
 const nodemailer = require('nodemailer');
-const express = require("express");
-const keys = require("./keys");
+const express = require('express');
+const cors = require('cors');
+const keys = require('./keys');
 
 
 // Sets up the Express App
 const app = express();
+
+app.use(cors())
 
 // no longer needed as express has its own parser now
 // const bodyParser = require('body-parser')
@@ -18,11 +21,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const PORT = process.env.PORT || 3000;
 
-app.get("/", function(req, res) {
+app.get('/', function(req, res) {
     res.send('<h1>welcome to the interwebs</h1>');
   });
 
-app.post("/email", function(req, res) {
+app.post('/email', function(req, res) {
     console.log('in the email endpoint')
     // req.body hosts is equal to the JSON post sent from the user
     // This works because of our body parsing middleware
@@ -59,7 +62,7 @@ app.post("/email", function(req, res) {
   
   });
   
-app.post("/rsvp", function(req, res) {
+app.post('/rsvp', function(req, res) {
   console.log('in the rsvp endpoint')
   
   // expected body
@@ -100,7 +103,7 @@ app.post("/rsvp", function(req, res) {
   // Starts the server to begin listening
   // =============================================================
   app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
+    console.log('App listening on PORT ' + PORT);
   });
 
 
